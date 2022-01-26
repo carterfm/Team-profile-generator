@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "jest": "^24.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carterfm/Team-profile-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carterfm/Team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/carterfm/Team-profile-generator#readme"
 }
