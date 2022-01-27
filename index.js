@@ -44,8 +44,9 @@ const schoolPrompt = [{
 //Finally, the prompt for choosing whether to add another team member or terminate the program
 const teamChoices = [{
     type: "list",
-    prompt: "What would you like to do?",
-    choices: ["Add engineer", "Add intern", "Finalize team"]
+    prompt: "What would you like to do next?",
+    choices: ["Add engineer to team", "Add intern to team", "Finalize team"],
+    name: "teamChoice"
 }];
 
 const runApp = async () => {
@@ -62,6 +63,29 @@ const runApp = async () => {
     //Adding manager's infor to team array
     team.push(new Manager(managerName, managerId, managerEmail, officeNumber));
     //Main program loop will go here
+    do {
+        const { teamChoice } = await inquirer.prompt(teamChoices);
+
+        switch(teamChoice) {
+            case "Add engineer to team":
+                console.log("Follow the subsequent prompts to enter this engineer's information.");
+                const { name: engineerName, id: engineerId, email: engineerEmail } = await inquirer.prompt(standardPrompt);
+                const { github } = await inquirer.prompt(githubPrompt);
+                team.push(new Engineer(engineerName, engineerId, engineerEmail, github));
+                break;
+            case "Add intern to team":
+                console.log("Follow the subsequent prompts to enter this intern's information.");
+                const { name: internName, id: internId, email: internEmail } = await inquirer.prompt(standardPrompt);
+                const { school } = await inquirer.prompt(schoolPrompt);
+                team.push(new Intern(internName, internId, internEmail, school));
+                break;
+            default: 
+                console.log("Finalizing team.")
+                keepLooping = false;
+                break;
+        }
+
+    } while (keepLooping);
 
     //Writing html file:
     fs.writeFile("./dist/team.html", generateHtml(team), (err) => {
