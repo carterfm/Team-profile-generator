@@ -1,4 +1,4 @@
-# Team Profile Generator ![](https://img.shields.io/badge/License-%22MIT%22-yellow.svg)
+# Team Profile Generator 
 
 ## Table of Contents
 
